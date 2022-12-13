@@ -1,0 +1,8 @@
+-c requirements.txt
+
+coverage[toml]
+joblib
+pytest
+pytest-cov
+mypy
+pre-commit
