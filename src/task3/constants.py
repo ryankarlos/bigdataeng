@@ -1,12 +1,13 @@
-from pyspark.sql.types import IntegerType, StringType, StructField, StructType
+from pyspark.sql.types import IntegerType, StringType, StructField, StructType, TimestampType
 
 SESSION_PATH = "lastfm-dataset-1K/user-session-track.tsv"
 PROFILE_PATH = "lastfm-dataset-1K/user-profile.tsv"
 
+
 SESSION_SCHEMA = StructType(
     [
         StructField("userid", StringType(), False),
-        StructField("timestamp", StringType(), True),
+        StructField("timestamp", TimestampType(), True),
         StructField("artistid", StringType(), True),
         StructField("artistname", StringType(), True),
         StructField("trackid", StringType(), True),
