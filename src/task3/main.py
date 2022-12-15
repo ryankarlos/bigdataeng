@@ -5,7 +5,18 @@ from constants import SESSION_PATH, SESSION_SCHEMA
 from pyspark.conf import SparkConf
 from pyspark.sql import SparkSession
 from pyspark.sql.dataframe import DataFrame
-from pyspark.sql.functions import col, collect_list, count, desc, expr, lag, max, min, round, sum
+from pyspark.sql.functions import (
+    col,
+    collect_list,
+    count,
+    desc,
+    expr,
+    lag,
+    max,
+    min,
+    round,
+    sum,
+)
 from pyspark.sql.types import Row
 from pyspark.sql.window import Window
 
@@ -71,7 +82,9 @@ def create_popular_songs(df: DataFrame, limit=100) -> List[Row]:
     return df1.collect()
 
 
-def create_session_ids_for_all_users(df: DataFrame, session_cutoff: int) -> DataFrame:
+def create_session_ids_for_all_users(
+    df: DataFrame, session_cutoff: int
+) -> DataFrame:
     """
     Creates a new 'session_ids' for each user depending for a timestamp if time between successive
     played tracks exceeds session_cutoff.
@@ -85,7 +98,13 @@ def create_session_ids_for_all_users(df: DataFrame, session_cutoff: int) -> Data
         df.withColumn("pretimestamp", lag("timestamp").over(w1))
         .withColumn(
             "delta_mins",
-            round((col("timestamp").cast("long") - col("pretimestamp").cast("long")) / 60),
+            round(
+                (
+                    col("timestamp").cast("long")
+                    - col("pretimestamp").cast("long")
+                )
+                / 60
+            ),
         )
         .withColumn(
             "sessionflag",
@@ -96,7 +115,7 @@ def create_session_ids_for_all_users(df: DataFrame, session_cutoff: int) -> Data
         .withColumn("sessionID", sum("sessionflag").over(w1))
     )
 
-    return df1.cache()
+    return df1
 
 
 def compute_top_n_longest_sessions(df: DataFrame, limit: int) -> DataFrame:
@@ -110,18 +129,25 @@ def compute_top_n_longest_sessions(df: DataFrame, limit: int) -> DataFrame:
     """
     df1 = (
         df.groupBy("userid", "sessionID")
-        .agg(min("timestamp").alias("session_start_ts"), max("timestamp").alias("session_end_ts"))
+        .agg(
+            min("timestamp").alias("session_start_ts"),
+            max("timestamp").alias("session_end_ts"),
+        )
         .withColumn(
             "session_length(hrs)",
             round(
-                (col("session_end_ts").cast("long") - col("session_start_ts").cast("long")) / 3600
+                (
+                    col("session_end_ts").cast("long")
+                    - col("session_start_ts").cast("long")
+                )
+                / 3600
             ),
         )
         .orderBy(desc("session_length(hrs)"))
         .limit(limit)
     )
 
-    return df1.cache()
+    return df1
 
 
 def longest_sessions_with_tracklist(
@@ -150,14 +176,18 @@ def longest_sessions_with_tracklist(
 
 
 if __name__ == "__main__":
-    spark = SparkSession.builder.appName("lastfm").config(conf=conf).getOrCreate()
+    spark = (
+        SparkSession.builder.appName("lastfm").config(conf=conf).getOrCreate()
+    )
     spark.sparkContext.setLogLevel("ERROR")
     df = read_session_data(spark)
     df.show()
     songs_per_user = create_users_and_distinct_songs_count(df)
     logger.info(f"Sample distinct songs per user: \n '{songs_per_user[:5]}'")
     popular_songs = create_popular_songs(df)
-    logger.info(f"First five of top 100 popular songs:\n '{popular_songs[:5]}'")
+    logger.info(
+        f"First five of top 100 popular songs:\n '{popular_songs[:5]}'"
+    )
     df_sessions = longest_sessions_with_tracklist(df)
     logger.info("First five of top 100 popular songs:\n")
     df_sessions.show()
