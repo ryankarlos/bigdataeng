@@ -1,18 +1,9 @@
-ID	URL
-1	http://mirrors.edge.kernel.org/archlinux/iso/2018.06.01/archlinux-2018.06.01-x86_64.txt
+ID	URL	Description
 
-2	https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.txt
+1	 https://github.com/itsfoss/text-files/blob/master/agatha.txt	text1
 
-3	https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-dvd-x86_64-28-1.1.txt
+2	https://github.com/itsfoss/text-files/blob/master/agatha_complete.txt  	text2
 
-4	http://mirrors.edge.kernel.org/archlinux/iso/2018.06.01/archlinux-2018.06.01-x86_64.txt
+3	https://github.com/itsfoss/text-files/blob/master/sample_log_file.txt 	text3
 
-5	https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.txt
-
-6	https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-dvd-x86_64-28-1.1.txt
-
-7	http://mirrors.edge.kernel.org/archlinux/iso/2018.06.01/archlinux-2018.06.01-x86_64.txt
-
-8	https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-9.4.0-amd64-netinst.txt
-
-9	https://download.fedoraproject.org/pub/fedora/linux/releases/28/Server/x86_64/iso/Fedora-Server-dvd-x86_64-28-1.1.txt
+4	https://github.com/itsfoss/text-files/blob/master/sherlock.txt 	text4
