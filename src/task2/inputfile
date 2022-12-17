@@ -1,9 +1,9 @@
 ID	URL	Description
 
-1	https://github.com/itsfoss/text-files/blob/master/agatha.txt	text1
+1	https://huggingface.co/distilbert-base-uncased/blob/main/vocab.txt      text1
 
-2	https://github.com/itsfoss/text-files/blob/master/agatha_complete.txt  	text2
+2	https://huggingface.co/distilbert-base-uncased/blob/main/vocab.txt      text2
 
-3	https://github.com/itsfoss/text-files/blob/master/sample_log_file.txt 	text3
+3	https://huggingface.co/distilbert-base-uncased/blob/main/vocab.txt      text3
 
-4	https://github.com/itsfoss/text-files/blob/master/sherlock.txt 	text4
+4	https://huggingface.co/distilbert-base-uncased/blob/main/vocab.txt      text4
