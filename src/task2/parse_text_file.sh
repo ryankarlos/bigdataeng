@@ -1,8 +1,6 @@
 #!/bin/bash
 
 inputfile=$1
-max_lines=${2:-50}
-
 
 function complex()
 {
@@ -15,8 +13,9 @@ done
 
 function simplified()
 {
-  awk 'NR%2==0{print $2}' inputfile | head -$max_lines | \
-  while read -r line ; do \
+  awk 'NR%2==0{print $2}' inputfile | head -50 | \
+  while read -r line ; \
+  do
       wget -c ${line} 2> /dev/null;
   done
 }

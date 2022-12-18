@@ -1,6 +1,17 @@
-from pyspark.sql.types import IntegerType, StringType, StructField, StructType, TimestampType
+import logging
 
-SESSION_PATH = "lastfm-dataset-1K/user-session-track.tsv"
+from pyspark.sql.types import (
+    StringType,
+    StructField,
+    StructType,
+    TimestampType,
+)
+
+SESSION_PATH = "data/lastfm-dataset-1K/user-session-track.tsv"
+RESULTS_PATH = "/tmp/results/task3/"
+
+LOG = logging.getLogger(__name__)
+logging.basicConfig(level=logging.INFO, format="%(levelname)s: %(message)s")
 
 SESSION_SCHEMA = StructType(
     [
@@ -12,4 +23,3 @@ SESSION_SCHEMA = StructType(
         StructField("trackname", StringType(), True),
     ]
 )
-

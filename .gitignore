@@ -34,4 +34,5 @@ venv.bak/
 # mypy
 .mypy_cache/
 .idea/
-lastfm-dataset-1K/
+data/lastfm-dataset-1K/
+.DS_Store
