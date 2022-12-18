@@ -28,8 +28,8 @@ conf = SparkConf()
 # this needs to be configured if running locally and depending on machine specs
 # to avoid warnings similar to
 # https://stackoverflow.com/questions/46907447/meaning-of-apache-spark-warning-calling-spill-on-rowbasedkeyvaluebatch
-conf.set("spark.driver.memory", "4g")
-conf.set("spark.executor.memory", "4g")
+conf.set("spark.driver.memory", "16g")
+conf.set("spark.executor.memory", "16g")
 
 
 def read_session_data(spark: SparkSession) -> DataFrame:
@@ -181,13 +181,12 @@ if __name__ == "__main__":
     )
     spark.sparkContext.setLogLevel("ERROR")
     df = read_session_data(spark)
-    df.show()
     songs_per_user = create_users_and_distinct_songs_count(df)
-    logger.info(f"Sample distinct songs per user: \n '{songs_per_user[:5]}'")
+    logger.info(f"\n Sample 10 Distinct Songs per user: \n\n {songs_per_user[:10]}")
     popular_songs = create_popular_songs(df)
     logger.info(
-        f"First five of top 100 popular songs:\n '{popular_songs[:5]}'"
+        f"\n Top 100 popular songs:\n\n {popular_songs}"
     )
     df_sessions = longest_sessions_with_tracklist(df)
-    logger.info("First five of top 100 popular songs:\n")
+    logger.info("\n Longest sessions with track list:\n")
     df_sessions.show()

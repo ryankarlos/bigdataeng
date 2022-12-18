@@ -1,7 +1,7 @@
 #!/bin/bash
 
 inputfile=$1
-func=${2:-simplified}
+max_lines=${2:-50}
 
 
 function complex()
@@ -15,13 +15,10 @@ done
 
 function simplified()
 {
-  awk '{print $2}' inputfile | tail -n +2 | while read -r line ;
-  do
-   if [ ! -z "${line}" ];
-   then
+  awk 'NR%2==0{print $2}' inputfile | head -$max_lines | \
+  while read -r line ; do \
       wget -c ${line} 2> /dev/null;
-   fi;
   done
 }
 
-$func
+simplified
