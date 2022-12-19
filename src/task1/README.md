@@ -1,7 +1,7 @@
 The `generate_data.py` script in the task1 folder generates simulated data for a fictional game, showing players
 and the level that they’re currently playing. Find how many players of each rank are playing each level.
 
-**Levels Table**
+**Players Table**
 
 | Player_ID | Player_Name | Rank | Level_ID |
 | -- | --- | --- | --- |
@@ -13,7 +13,7 @@ and the level that they’re currently playing. Find how many players of each ra
 | ... | ... | ... | ... |
 
 
-**Players Table**
+**Levels Table**
 
 | Level_ID | Level_Name |
 | -- | --- |
