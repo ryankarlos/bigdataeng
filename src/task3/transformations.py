@@ -50,7 +50,7 @@ def create_session_ids_for_all_users(
     df: DataFrame, session_cutoff: int
 ) -> DataFrame:
     """
-    Creates a new 'session_ids' for each user depending for a timestamp if time between successive
+    Creates a new 'session_ids' for each user if time between successive
     played tracks exceeds session_cutoff.
     :param df: Spark DataFrame
     :param session_cutoff: int
