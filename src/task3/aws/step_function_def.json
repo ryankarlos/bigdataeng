@@ -1,0 +1,67 @@
+{
+  "Comment": "Glue ETL flights pipeline execution",
+  "StartAt": "Glue StartJobRun",
+  "States": {
+    "Glue StartJobRun": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::glue:startJobRun",
+      "Parameters": {
+        "JobName": "LastFM_Analysis",
+        "MaxCapacity": 2
+      },
+      "ResultPath": "$.gluejobresults",
+      "Next": "Wait"
+    },
+    "Wait": {
+      "Type": "Wait",
+      "Seconds": 30,
+      "Next": "Get Glue Job status"
+    },
+    "Get Glue Job status": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::aws-sdk:glue:getJobRun",
+      "Parameters": {
+        "JobName.$": "$.gluejobresults.JobName",
+        "RunId.$": "$.gluejobresults.JobRunId"
+      },
+      "Next": "Check Glue Job status",
+      "ResultPath": "$.gluejobresults.status"
+    },
+    "Check Glue Job status": {
+      "Type": "Choice",
+      "Choices": [
+        {
+          "Variable": "$.gluejobresults.status.JobRun.JobRunState",
+          "StringEquals": "SUCCEEDED",
+          "Next": "StartCrawler"
+        }
+      ],
+      "Default": "Wait"
+    },
+    "StartCrawler": {
+      "Type": "Task",
+      "Parameters": {
+        "Name": "LastFM-crawler"
+      },
+      "Resource": "arn:aws:states:::aws-sdk:glue:startCrawler",
+      "Next": "Wait for crawler to complete"
+    },
+    "Wait for crawler to complete": {
+      "Type": "Wait",
+      "Seconds": 70,
+      "Next": "SNS Publish Success"
+    },
+    "SNS Publish Success": {
+      "Type": "Task",
+      "Resource": "arn:aws:states:::sns:publish",
+      "Parameters": {
+        "TopicArn": "arn:aws:sns:*:Default",
+        "Message.$": "$"
+      },
+      "Next": "Success"
+    },
+    "Success": {
+      "Type": "Succeed"
+    }
+  }
+}
