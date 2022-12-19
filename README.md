@@ -1,10 +1,11 @@
 # Big Data Engineering Tasks
 
 The `src` folder contains tasks 1,2 and 3 which contain `README.md` with descriptions on
-the tasks and solution.
-https://github.com/ryankarlos/bigdataeng/tree/master/src/task1#readme
-https://github.com/ryankarlos/bigdataeng/blob/master/src/task2/README.md
-https://github.com/ryankarlos/bigdataeng/blob/master/src/task3/README.md
+the tasks and solution:
+
+* src/task1/README.md
+* src/task2/README.md
+* src/task3/README.md
 
 ### Setting up the environment
 

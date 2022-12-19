@@ -3,8 +3,12 @@ What can you tell about the expected contents of the input file? What does the c
 would you simplify it?
 
 The contents of the input file should be similar to `inputfile.txt` in task2 folder. This is a tab delimited file
-with n number of columns, where the 2nd column contains urls for downloading text files. To understand why it is likely
-to be structured in this way, lets break down each line of the bash command and see what it is trying to do:
+with n number of columns, where the 2nd column contains urls for downloading text files.
+*Note*: The urls are fake and for illustration purposes, so will not stream any output to stdout
+when the script is run.
+
+To understand why it is likely to be structured in this way, lets break down each line of the bash command and see
+what it is trying to do:
 
 ```bash
 for a in `yes | nl | head -50 | cut -f 1`; do
@@ -30,7 +34,7 @@ separated by whitespace and assign it to $1 , $2 etc in order, and prints out th
 This is then piped to `xargs wget -c` which would try downloading each file from the url using `wget` command. If there is
 an error, this would be redirected to /dev/null and not stream to stdout.
 
-
+### Simplified command
 
 The command could be simplified, as shown in the function `simplified` in  `parse_text_file.sh`.
 Lets break down what the code does:
@@ -52,7 +56,10 @@ wget -c ${line} 2> /dev/null;
 ```
 
 This will run the wget command to download the file from the url, with any error, redirected to `/dev/null`.
+The `-c` flag will resumes an interrupted download previously started by `wget` itself.
 To run the script, execute the following command, which takes the inputfile path as an argument.
+Since the urls in this `inputfile` example are fake, you will not see any output in stdout as all
+the errors are redirected to `/dev/null`.
 
 ```
 cd src/task2 ;
