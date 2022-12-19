@@ -21,6 +21,6 @@ with Diagram("AWS Serverless Spark Workflow", show=True, direction="LR"):
     StepFunction >> Crawler
     StepFunction >> SNS_Email
     S31 >> Glue_Job >> S32 >> Crawler
-    Glue_Job >> Crawler >> SNS_Email >> User
+    Glue_Job >> Crawler >> SNS_Email >> User2
     Crawler >> Data_Catalog
     Data_Catalog - Athena >> User2
